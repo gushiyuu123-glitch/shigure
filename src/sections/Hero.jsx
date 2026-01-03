@@ -164,7 +164,7 @@ export default function Hero() {
         className="
           relative z-10
           ml-auto
-          pr-[10vw]
+          pr-[13vw]
           flex
           items-center
           text-shadow: 0 2px 12px rgba(0,0,0,0.12);
@@ -185,12 +185,12 @@ export default function Hero() {
   "
 >
 
-  時が、<br />
+  時が、 <br />
   <span className="jisage">ほどける宿。</span>
 </h1>
 
 
-  <div className="relative inline-block left-[-13em]">
+  <div className="relative inline-block left-[-11em]">
   {/* 縦文字用・空気レイヤー */}
 <span
   aria-hidden

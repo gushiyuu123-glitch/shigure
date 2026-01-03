@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================
+   Color Tokens（四季）
+========================= */
+:root {
+  /* Main Ink */
+  --ink-spring: #1a1a1a;
+  --ink-summer: #222222;
+  --ink-autumn: #2a241f;
+  --ink-winter: #121212;
+
+  /* Sub Ink（空気用） */
+  --ink-sub-spring: #6f6a63;
+  --ink-sub-summer: #6a6f63;
+  --ink-sub-autumn: #6b5f52;
+  --ink-sub-winter: #7a7a7a;
+
+  /* Inverse */
+  --ink-inverse: #f4f4f4;
+
+  /* Paper */
+  --paper: #fbfaf7;
+}
+
+/* =========================
+   Base Typography
+========================= */
+body {
+  font-family: "Shippori Mincho", serif;
+  background: var(--paper);
+  color: var(--ink-spring);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* 文字の芯（存在感を出しすぎない） */
+  text-shadow:
+    0 0 0.6px rgba(0,0,0,0.14),
+    0 0.8px 1.2px rgba(0,0,0,0.06);
+}
+
+/* =========================
+   Writing Modes
+========================= */
+.writing-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  white-space: nowrap;
+}
+
+.writing-horizontal {
+  writing-mode: horizontal-tb;
+  white-space: nowrap;
+}
+
+/* 字下げ（和文リズム） */
+.jisage {
+  display: inline-block;
+  margin-top: 1em;
+}
+
+/* =========================
+   Readability Layer（空気）
+========================= */
+.text-air {
+  position: relative;
+  display: inline-block;
+}
+
+/* 主に視認性を担う層 */
+.text-air::before {
+  content: "";
+  position: absolute;
+  inset: -1.2rem;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(248,246,242,0.65) 0%,
+    rgba(248,246,242,0.38) 38%,
+    rgba(248,246,242,0.18) 58%,
+    rgba(248,246,242,0.0) 72%
+  );
+  filter: blur(18px);
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+/* 余韻用（存在を感じさせない） */
+.text-air::after {
+  content: "";
+  position: absolute;
+  inset: -2.2rem;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255,255,255,0.16) 0%,
+    rgba(255,255,255,0.07) 45%,
+    rgba(255,255,255,0.0) 70%
+  );
+  filter: blur(32px);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* =========================
+   Sub Text Boost（弱い文字）
+========================= */
+.text-sub {
+  color: var(--ink-sub-spring);
+  filter: contrast(1.08);
+}
+
+/* =========================
+   Hero / Title 微調整
+========================= */
+.hero-title {
+  text-shadow:
+    0 0 0.4px rgba(0,0,0,0.08),
+    0 0.6px 0.8px rgba(0,0,0,0.05);
+}
+
+/* =========================
+   Onsen Smoke Animations
+========================= */
+@keyframes onsenSmoke {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateY(-4%) translateX(2%) scale(1.05);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateY(-8%) translateX(-2%) scale(1.1);
+    opacity: 0.55;
+  }
+}
+
+@keyframes onsenSmokeSlow {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.35;
+  }
+  100% {
+    transform: translateY(-6%) scale(1.08);
+    opacity: 0.45;
+  }
+}
+
+.animate-onsen-smoke {
+  animation: onsenSmoke 22s ease-in-out infinite;
+}
+
+.animate-onsen-smoke-slow {
+  animation: onsenSmokeSlow 34s ease-in-out infinite;
+}

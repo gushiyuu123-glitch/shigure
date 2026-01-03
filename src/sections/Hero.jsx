@@ -34,10 +34,10 @@ export default function Hero() {
 <div
   className="
     absolute inset-y-0 right-0
-    w-[37%]
+    w-[34%]
     bg-gradient-to-r
-    from-[#f3f1ed]/30
-    via-[#f3f1ed]/10
+    from-[#f3f1ed]/12
+    via-[#f3f1ed]/05
     to-transparent
     pointer-events-none
   "

@@ -156,3 +156,15 @@ body {
 .animate-onsen-smoke-slow {
   animation: onsenSmokeSlow 34s ease-in-out infinite;
 }
+@keyframes seasonFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.55;
+  }
+}
+
+.animate-seasonFadeIn {
+  animation: seasonFadeIn 1200ms ease-out forwards;
+}

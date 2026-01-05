@@ -67,6 +67,9 @@ export default function SeasonBackground({ season, hideOnHero }) {
     `,
   };
 
+  /* =====================
+     表示制御（Hero直下）
+  ===================== */
   const [visible, setVisible] = useState(!hideOnHero);
 
   useEffect(() => {
@@ -80,18 +83,37 @@ export default function SeasonBackground({ season, hideOnHero }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, [hideOnHero]);
 
+  /* =====================
+     季節クロスフェード制御
+  ===================== */
+  const [current, setCurrent] = useState(season);
+  const [next, setNext] = useState(null);
+
+  useEffect(() => {
+    if (season === current) return;
+
+    setNext(season);
+
+    const t = setTimeout(() => {
+      setCurrent(season);
+      setNext(null);
+    }, 1200);
+
+    return () => clearTimeout(t);
+  }, [season, current]);
+
   if (!visible) return null;
 
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden">
       {/* =====================
-          背景写真（存在を残す）
+          現在の季節
       ===================== */}
       <img
-        key={season}
-        src={images[season]}
+        src={images[current]}
         alt=""
         className="
+          absolute inset-0
           w-full h-full object-cover
           opacity-[0.55]
           saturate-[0.9]
@@ -99,9 +121,30 @@ export default function SeasonBackground({ season, hideOnHero }) {
           brightness-[0.965]
           scale-[1.015]
           blur-[0.5px]
-          transition-all duration-[1200ms] ease-out
+          transition-opacity duration-[1200ms] ease-out
         "
       />
+
+      {/* =====================
+          次の季節（クロスフェード）
+      ===================== */}
+      {next && (
+        <img
+          src={images[next]}
+          alt=""
+          className="
+            absolute inset-0
+            w-full h-full object-cover
+            opacity-0
+            saturate-[0.9]
+            contrast-[0.92]
+            brightness-[0.965]
+            scale-[1.015]
+            blur-[0.5px]
+            animate-seasonFadeIn
+          "
+        />
+      )}
 
       {/* =====================
           季節の空気色
@@ -109,7 +152,7 @@ export default function SeasonBackground({ season, hideOnHero }) {
       <span
         aria-hidden
         className="absolute inset-0 pointer-events-none"
-        style={{ backgroundImage: seasonTint[season] }}
+        style={{ backgroundImage: seasonTint[current] }}
       />
 
       {/* =====================
